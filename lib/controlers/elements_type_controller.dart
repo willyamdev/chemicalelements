@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class HomeController {
+class ElementsTypeController {
   getElementType(int type) {
     String elementType;
 

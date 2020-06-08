@@ -1,3 +1,4 @@
+import 'package:chemicalelements/controlers/elements_type_controller.dart';
 import 'package:flutter/material.dart';
 
 class VerticalProgressBar extends StatefulWidget {
@@ -10,7 +11,7 @@ class VerticalProgressBar extends StatefulWidget {
   _VerticalProgressBarState createState() => _VerticalProgressBarState();
 }
 
-class _VerticalProgressBarState extends State<VerticalProgressBar> {
+class _VerticalProgressBarState extends State<VerticalProgressBar>{
 
   calculatePercentage(){
     return widget.currentElement * 100 / widget.elementsLenght;

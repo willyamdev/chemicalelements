@@ -2,7 +2,7 @@ import 'chemical_element.dart';
 
 class ElementsList {
   List<ChemicalElement> elementsList = [
-    ChemicalElement("Hidrogênio", "H", 1, "blabla",),
+    ChemicalElement("Hidrogênio", "H", 1, "Com uma massa atómica de aproximadamente 1,0 u, o hidrogénio é o elemento menos denso. Ele geralmente apresenta-se em sua forma molecular, formando o gás diatômico nas condições normais de temperatura e pressão. Este gás é inflamável, incolor, inodoro, e insolúvel em água.[2] O hidrogénio, por possuir propriedades distintas, não se enquadra claramente em nenhum grupo da tabela periódica, sendo muitas vezes colocado no grupo 1 (anteriormente chamado de 1A) por possuir apenas 1 eletrão na camada de valência (ou última camada).[3]",),
     ChemicalElement("Hélio", "He", 2, "blabla"),
     ChemicalElement("Lítio", "Li", 3, "blabla",),
     ChemicalElement("Berílio", "Be", 4, "blabla",),

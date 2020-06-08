@@ -1,8 +1,9 @@
 import 'package:chemicalelements/components/custom_app_bar.dart';
 import 'package:chemicalelements/components/elements_page_view.dart';
 import 'package:chemicalelements/components/verticalProgressBar.dart';
-import 'package:chemicalelements/controlers/home_controller.dart';
+import 'package:chemicalelements/controlers/elements_type_controller.dart';
 import 'package:chemicalelements/helpers/screen_helper.dart';
+import 'package:chemicalelements/models/chemical_element.dart';
 import 'package:chemicalelements/models/elements_list.dart';
 import 'package:flutter/material.dart';
 
@@ -11,11 +12,34 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with HomeController {
-  int filter = 3;
+class _HomeState extends State<Home> with ElementsTypeController {
+  int filter = 0;
   int currentElement = 0;
   ScreenHelper screenHelper;
-  ElementsList elementsList = ElementsList();
+  ElementsList allElementsList = ElementsList();
+  List<ChemicalElement> elementsList;
+
+  @override
+  void initState() {
+    super.initState();
+    elementsList = allElementsList.elementsList;
+  }
+
+  changeTypeFilter(int type) {
+    List<ChemicalElement> newList;
+    if (type == 0) {
+      newList = allElementsList.elementsList;
+    } else {
+      newList = allElementsList.elementsList
+          .where((element) => element.elementType == type)
+          .toList();
+    }
+
+    setState(() {
+      elementsList = newList;
+      filter = type;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +47,7 @@ class _HomeState extends State<Home> with HomeController {
 
     return Scaffold(
       backgroundColor: Color(0xffF8F8F8),
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar("home"),
       body: Container(
         width: screenHelper.width,
         padding: EdgeInsets.only(left: 20),
@@ -67,11 +91,11 @@ class _HomeState extends State<Home> with HomeController {
                       ),
                       SizedBox(height: 5),
                       Expanded(
-                          child: VerticalProgressBar(currentElement + 1,
-                              elementsList.elementsList.length)),
+                          child: VerticalProgressBar(
+                              currentElement + 1, elementsList.length)),
                       SizedBox(height: 5),
                       Text(
-                        elementsList.elementsList.length.toString(),
+                        elementsList.length.toString(),
                         style: TextStyle(fontFamily: 'Quicksand'),
                       ),
                     ],
@@ -85,7 +109,7 @@ class _HomeState extends State<Home> with HomeController {
                           currentElement = ei;
                         });
                       },
-                      elementsList: elementsList.elementsList,
+                      elementsList: elementsList,
                     ))
               ],
             ),
@@ -100,21 +124,21 @@ class _HomeState extends State<Home> with HomeController {
                     _categoryButton(1,
                         "assets/images/elements_type_icons/icon_nonmetal.png"),
                     _categoryButton(2,
-                        "assets/images/elements_type_icons/icon_gasnobre.png"),
+                        "assets/images/elements_type_icons/icon_noblegas.png"),
                     _categoryButton(3,
-                        "assets/images/elements_type_icons/icon_metaloid.png"),
+                        "assets/images/elements_type_icons/icon_alkaline_metal.png"),
                     _categoryButton(4,
-                        "assets/images/elements_type_icons/icon_actinide.png"),
+                        "assets/images/elements_type_icons/icon_alkaline_earth_metal.png"),
                     _categoryButton(5,
-                        "assets/images/elements_type_icons/icon_actinide.png"),
+                        "assets/images/elements_type_icons/icon_semimetals.png"),
                     _categoryButton(6,
-                        "assets/images/elements_type_icons/icon_actinide.png"),
+                        "assets/images/elements_type_icons/icon_halogens.png"),
                     _categoryButton(7,
-                        "assets/images/elements_type_icons/icon_actinide.png"),
+                        "assets/images/elements_type_icons/icon_other_metals.png"),
                     _categoryButton(8,
-                        "assets/images/elements_type_icons/icon_actinide.png"),
+                        "assets/images/elements_type_icons/icon_transition_metals.png"),
                     _categoryButton(9,
-                        "assets/images/elements_type_icons/icon_actinide.png"),
+                        "assets/images/elements_type_icons/icon_lanthanides.png"),
                     _categoryButton(10,
                         "assets/images/elements_type_icons/icon_actinide.png"),
                   ],
@@ -127,11 +151,7 @@ class _HomeState extends State<Home> with HomeController {
 
   _categoryButton(int correspondentElement, String iconNotSelected) {
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          filter = correspondentElement;
-        });
-      },
+      onTap: () => changeTypeFilter(correspondentElement),
       child: Container(
           width: 50,
           height: 50,
