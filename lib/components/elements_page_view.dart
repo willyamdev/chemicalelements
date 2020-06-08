@@ -1,7 +1,8 @@
+import 'package:chemicalelements/controlers/home_controller.dart';
 import 'package:chemicalelements/models/chemical_element.dart';
 import 'package:flutter/material.dart';
 
-class ElementsPageView extends StatefulWidget {
+class ElementsPageView extends StatefulWidget{
   final ValueChanged<int> onChangeElement;
   List<ChemicalElement> elementsList;
   ElementsPageView({this.onChangeElement, this.elementsList});
@@ -10,7 +11,7 @@ class ElementsPageView extends StatefulWidget {
   _ElementsPageViewState createState() => _ElementsPageViewState();
 }
 
-class _ElementsPageViewState extends State<ElementsPageView> {
+class _ElementsPageViewState extends State<ElementsPageView> with HomeController{
   int currentElement = 0;
   PageController _pageController = PageController(viewportFraction: 0.8);
 
@@ -64,7 +65,7 @@ class _ElementsPageViewState extends State<ElementsPageView> {
       ),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(32),
-          color: _getElementColor(elementType)),
+          color: getElementColor(elementType)),
       padding: EdgeInsets.all(20),
     );
   }
@@ -90,7 +91,7 @@ class _ElementsPageViewState extends State<ElementsPageView> {
   }
 
   _elementTypeContainer(int type) {
-    return Text(_getElementType(type),
+    return Text(getElementType(type),
         style: TextStyle(
           color: Colors.white,
           fontSize: 17,
@@ -105,83 +106,5 @@ class _ElementsPageViewState extends State<ElementsPageView> {
             fontSize: 35,
             fontFamily: 'Quicksand',
             fontWeight: FontWeight.bold));
-  }
-
-  _getElementType(int type) {
-    String elementType;
-
-    switch (type) {
-      case 1:
-        elementType = "Não metal";
-        break;
-      case 2:
-        elementType = "Gás nobre";
-        break;
-      case 3:
-        elementType = "Metal alcalino";
-        break;
-      case 4:
-        elementType = "Metal alcalino terroso";
-        break;
-      case 5:
-        elementType = "Semimetal";
-        break;
-      case 6:
-        elementType = "Halogênio";
-        break;
-      case 7:
-        elementType = "Outros metais";
-        break;
-      case 8:
-        elementType = "Metal de transição";
-        break;
-      case 9:
-        elementType = "Lantanídeo";
-        break;
-      case 10:
-        elementType = "Actinídio";
-        break;
-    }
-
-    return elementType;
-  }
-
-  _getElementColor(int type) {
-    Color elementColor;
-
-    switch (type) {
-      case 1:
-        elementColor = Colors.green;
-        break;
-      case 2:
-        elementColor = Colors.blue;
-        break;
-      case 3:
-        elementColor = Colors.orange;
-        break;
-      case 4:
-        elementColor = Colors.yellow;
-        break;
-      case 5:
-        elementColor = Colors.blueGrey;
-        break;
-      case 6:
-        elementColor = Colors.blueAccent;
-        break;
-      case 7:
-        elementColor = Colors.lime;
-        break;
-      case 8:
-        elementColor = Colors.pink;
-        break;
-      case 9:
-        elementColor = Colors.lightGreen;
-        break;
-      case 10:
-        elementColor = Colors.purple;
-        break;
-    }
-
-    return elementColor;
   }
 }
