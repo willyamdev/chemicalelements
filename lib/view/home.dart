@@ -87,12 +87,12 @@ class _HomeState extends State<Home> with ElementsTypeController {
                             ? "1"
                             : (currentElement + 1).toString(),
                         style: TextStyle(
-                            fontFamily: 'Quicksand', color: Colors.red),
+                            fontFamily: 'Quicksand', color: getElementColor(filter)),
                       ),
                       SizedBox(height: 5),
                       Expanded(
                           child: VerticalProgressBar(
-                              currentElement + 1, elementsList.length)),
+                              currentElement + 1, elementsList.length, filter)),
                       SizedBox(height: 5),
                       Text(
                         elementsList.length.toString(),

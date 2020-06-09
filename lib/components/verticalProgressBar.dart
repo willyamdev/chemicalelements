@@ -5,13 +5,14 @@ class VerticalProgressBar extends StatefulWidget {
 
   int currentElement;
   int elementsLenght;
-  VerticalProgressBar(this.currentElement, this.elementsLenght);
+  int filterColor;
+  VerticalProgressBar(this.currentElement, this.elementsLenght, this.filterColor);
 
   @override
   _VerticalProgressBarState createState() => _VerticalProgressBarState();
 }
 
-class _VerticalProgressBarState extends State<VerticalProgressBar>{
+class _VerticalProgressBarState extends State<VerticalProgressBar> with ElementsTypeController{
 
   calculatePercentage(){
     return widget.currentElement * 100 / widget.elementsLenght;
@@ -33,7 +34,7 @@ class _VerticalProgressBarState extends State<VerticalProgressBar>{
           AnimatedContainer(
             duration: Duration(milliseconds: 300),
             decoration: BoxDecoration(
-                color: Colors.red, borderRadius: BorderRadius.circular(14)),
+                color: getElementColor(widget.filterColor), borderRadius: BorderRadius.circular(14)),
             width: 7,
             height: maxSize * calculatePercentage(),
           )

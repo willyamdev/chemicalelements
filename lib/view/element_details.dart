@@ -101,6 +101,7 @@ class ElementDetails extends StatelessWidget with ElementsTypeController {
   _elementDescription(String description) {
     return Text(
         description,
+        textAlign: TextAlign.justify,
         style: TextStyle(
           color: Colors.white,
           fontSize: 15,
